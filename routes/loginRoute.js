@@ -1,26 +1,22 @@
 const express = require("express");
 const connection = require("../services/connection");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
-//Routes
 router.get("/", (req, res) => {
-  res.send("we are on login page");
+  res.send("we are on signIn route");
 });
 
 router.post("/", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  var email = req.body.email;
+  var password = req.body.password;
   connection.query(
-    "SELECT * FROM SignUp WHERE email = ? AND password = ?",
-    [(email, password)],
+    "SELECT * FROM users WHERE email = ? AND password = ?",
+    [email, password],
     (err, rows) => {
-      if (rows.length > 0) {
-        req.session.loggedIn = true;
-        req.session.email = email;
-        req.session.password = password;
-        res.sendStatus(200);
-      } else {
-      }
+      req.session.loggedin = true;
+      req.session.email = email;
+      res.sendStatus(200);
     }
   );
 });
