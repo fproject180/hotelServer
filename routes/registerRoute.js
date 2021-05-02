@@ -1,30 +1,39 @@
-const express = require("express");
 const connection = require("../services/connection");
-const router = express.Router();
 
-//Routes
-router.get("/", (req, res) => {
-  res.send("we are on register page");
+const router = require("express").Router();
+
+router.get("/register", (req, response) => {
+    response.send("register page");
 });
 
-router.post("/", (req, res) => {
+router.post("/register", (req, response) => {
+  var name = req.body.name;
+  var email = req.body.email;
+  var password = req.body.password;
+  var mobileNo = req.body.mobileNo;
+  var address = req.body.address;
+  var dob = req.body.dob;
   connection.query(
-    'INSERT INTO SignUp VALUES("' +
-      req.body.Name +
-      '","' +
-      req.body.Email +
-      '","' +
-      req.body.Password +
-      '","' +
-      req.body.MobileNo +
-      '")',
+    "INSERT INTO HOTEL_USER VALUES('" +
+      name +
+      "','" +
+      email +
+      "','" +
+      password +
+      "','" +
+      mobileNo +
+      "','" +
+      address +
+      "','" +
+      dob +
+      "')",
     (err, rows, fields) => {
       if (err) {
-        console.log("query not successfull");
-        res.sendStatus(400);
+        console.log("error in creating user");
+        response.sendStatus(400);
       } else {
-        console.log("query successfull");
-        res.sendStatus(201);
+        console.log("user created successfully");
+        response.sendStatus(201);
       }
     }
   );
