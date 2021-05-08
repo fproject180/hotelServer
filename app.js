@@ -5,6 +5,8 @@ require("./services/connection");
 const session = require("express-session");
 
 const registerRoute = require("./routes/registerRoute");
+const usersRoute = require('./routes/usersRoute');
+const hotelRoute = require('./routes/hotelRoute');
 
 
 app.set('view engine', 'ejs');
@@ -24,6 +26,8 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 app.use("/auth",registerRoute);
+app.use("/usersRoute", usersRoute);
+app.use("/hotelRoute",hotelRoute);
 
 //routes
 app.get("/", (req, res) => {
