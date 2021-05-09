@@ -2,31 +2,41 @@ const router = require("express").Router();
 const connection = require("../services/connection");
 
 router.get("/", (req, res) => {
+  connection.query("SELECT * FROM Hotel_Booking", (err, rows) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(rows);
+    }
+  });
+});
+
+router.post("/", (req, res) => {
+  var appliances_Status1 = req.body.status1;
+  var appliances_Status2 = req.body.status2;
+  var appliances_Status3 = req.body.status3;
+  var appliances_Status4 = req.body.status4;
+  var appliances_Status5 = req.body.status5;
   connection.query(
-    "SELECT hotelName, city, roomType,roomID, roomIP, checkInDate, checkOutDate,  FROM Hotel_Booking",
-    (err, rows) => {
-      if (err) {
-        console.log("No hotels found");
-      } else {
-        res.send(rows);
-      }
+    "UPDATE Hotel_Booking SET appliances_Status1=?,appliances_Status2=?appliances_Status3=?appliances_Status4=?appliances_Status5=?",
+    [appliances_Status1,appliances_Status2,appliances_Status3,appliances_Status4,appliances_Status5],(err, rows, fields) => {
+        if (err) {
+            console.log(err);   
+        } else {
+            console.log("updated");
+        }
     }
   );
 });
 
-router.post("/appliances", (req, res) => {
-  var mobileNo = req.body.mobileNo;
-  connection.query(
-    "SELECT appliance1,appliance_status1, appliance2,appliance_status2 appliance3,appliance_status3 appliance4,appliance_status4, appliance5, appliance_status5 FROM Hotel_Booking WHERE mobileNo=?",
-    [mobileNo],
-    (err, rows) => {
-      if (err) {
-        console.log("Error Selecting Appliance");
-      } else {
-        res.send(rows);
-      }
-    }
-  );
+router.get("/appliances",(req, res)=>{
+    connection.query("SELECT appliances_Status1,appliances_Status2,appliances_Status3,appliances_Status4,appliances_Status5 FROM Hotel_Booking",(err, rows, fields)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(rows);
+        }
+    });
 });
 
 module.exports = router;
