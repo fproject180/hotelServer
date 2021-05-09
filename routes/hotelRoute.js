@@ -2,10 +2,8 @@ const router = require("express").Router();
 const connection = require("../services/connection");
 
 router.get("/", (req, res) => {
-  var mobileNo = req.body.mobileNo;
   connection.query(
-    "SELECT hotelName, city, roomType,roomID, roomIP, checkInDate, checkOutDate,  FROM Hotel_Booking WHERE mobileNo=?",
-    [mobileNo],
+    "SELECT hotelName, city, roomType,roomID, roomIP, checkInDate, checkOutDate,  FROM Hotel_Booking",
     (err, rows) => {
       if (err) {
         console.log("No hotels found");
@@ -16,9 +14,6 @@ router.get("/", (req, res) => {
   );
 });
 
-
-
-
 router.post("/appliances", (req, res) => {
   var mobileNo = req.body.mobileNo;
   connection.query(
@@ -27,19 +22,6 @@ router.post("/appliances", (req, res) => {
     (err, rows) => {
       if (err) {
         console.log("Error Selecting Appliance");
-      } else {
-        res.send(rows);
-      }
-    }
-  );
-});
-
-router.get("/", (req, res) => {
-  connection.query(
-    "SELECT name, email, password, mobileNo, address,dob FROM Hotel_User",
-    (err, rows) => {
-      if (err) {
-        console.log("No users found!");
       } else {
         res.send(rows);
       }
