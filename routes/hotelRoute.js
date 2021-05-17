@@ -79,6 +79,19 @@ router.post("/", (req, res) => {
   );
 });
 
+router.get("/", (req, res) => {
+  connection.query(
+    "SELECT appliance_status1, appliance_status2, appliance_status3, appliance_status4, appliance_status5 FROM Hotel_Booking",
+    (err, rows) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(rows);
+      }
+    }
+  );
+});
+
 router.post("/appliances", (req, res) => {
   var appliances_Status1 = req.body.status1;
   var appliances_Status2 = req.body.status2;
