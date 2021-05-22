@@ -79,7 +79,7 @@ router.post("/", (req, res) => {
   );
 });
 
-router.get("/", (req, res) => {
+router.get("/appliances", (req, res) => {
   connection.query(
     "SELECT appliance_status1, appliance_status2, appliance_status3, appliance_status4, appliance_status5 FROM Hotel_Booking",
     (err, rows) => {
