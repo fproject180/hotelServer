@@ -12,7 +12,7 @@ router.post("/login", (req, res) => {
   var mobileNo = req.body.mobileNo;
 
   connection.query(
-    "SELECT * FROM Hotel_Booking WHERE mobileNo = ?",
+    "SELECT * FROM Hotel_User WHERE mobileNo = ?",
     [mobileNo],
     (err, rows, fields) => {
       if (rows.length > 0) {
