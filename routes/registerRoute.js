@@ -15,7 +15,7 @@ router.post("/register", (req, response) => {
   var dob = req.body.dob;
 
   connection.query(
-    "INSERT INTO HOTEL_USER VALUES('" +
+    "INSERT INTO Hotel_User VALUES('" +
       name +
       "','" +
       email +

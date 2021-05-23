@@ -5,6 +5,7 @@ require("./services/connection");
 const session = require("express-session");
 
 const registerRoute = require("./routes/registerRoute");
+const loginRoute = require("./routes/loginRoute");
 const usersRoute = require("./routes/usersRoute");
 const hotelRoute = require("./routes/hotelRoute");
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 app.use("/auth", registerRoute);
+app.use("/auth", loginRoute);
 app.use("/usersRoute", usersRoute);
 app.use("/hotelRoute", hotelRoute);
 
