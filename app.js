@@ -5,11 +5,10 @@ require("./services/connection");
 const session = require("express-session");
 
 const registerRoute = require("./routes/registerRoute");
-const usersRoute = require('./routes/usersRoute');
-const hotelRoute = require('./routes/hotelRoute');
+const usersRoute = require("./routes/usersRoute");
+const hotelRoute = require("./routes/hotelRoute");
 
-
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 //middlewares
 app.use(
@@ -25,9 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static("public"));
-app.use("/auth",registerRoute);
+app.use("/auth", registerRoute);
 app.use("/usersRoute", usersRoute);
-app.use("/hotelRoute",hotelRoute);
+app.use("/hotelRoute", hotelRoute);
 
 //routes
 app.get("/", (req, res) => {
